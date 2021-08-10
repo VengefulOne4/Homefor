@@ -1,0 +1,29 @@
+@import "helpers/variables";
+@import "helpers/mixins";
+@import "helpers/functions";
+@import "vendor/libs";
+@import "base/fonts";
+@import "base/general";
+@import "../blocks/modules";
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    //color: $gray;
+}
+
+#custom-handle {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+}
+
+.input-description {
+    display: block;
+}
