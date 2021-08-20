@@ -7,6 +7,7 @@
         <meta name="theme-color" content="#fff">
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="shortcut icon" href="../img/favicon.png" type="image/png">
         <link rel="shortcut icon" href="img/favicons/favicon.ico" type="image/x-icon">
         <link rel="icon" sizes="16x16" href="img/favicons/favicon-16x16.png" type="image/png">
         <link rel="icon" sizes="32x32" href="img/favicons/favicon-32x32.png" type="image/png">
@@ -23,82 +24,547 @@
         <link rel="apple-touch-icon" sizes="167x167" href="img/favicons/apple-touch-icon-167x167.png">
         <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon-180x180.png">
         <link rel="apple-touch-icon" sizes="1024x1024" href="img/favicons/apple-touch-icon-1024x1024.png">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://resources/demos/style.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" />
         <link rel="stylesheet" href="styles/main.css">
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-        </style>
     </head>
     <body>
-        <div class="section-main">
-            @@include("../blocks/modules/header/header.html")
-            <div class="wrapper">
-                <div class="main">
-                    <div class="form-item">
-                        <select name="objectType" id="objectType">
-                            <option>Тип объекта</option>
-                            <option>Загородные дома</option>
-                            <option>Городские квартиры</option>
-                        </select>
-                        <select name="region" id="region">
-                            <option>Район</option>
-                            <option>Центральный</option>
-                            <option>Советский</option>
-                            <option>Дзержинский</option>
-                            <option>Октябрьский</option>
-                            <option>Ленинский</option>
-                            <option>Кировский</option>
-                            <option>Железнодорожный</option>
-                        </select>
-                        <label for="area">Площадь</label>
-                        <input type="number">
-                        <p class="input-description">м2</p>
-                        <div id="area">
-                            <div id="custom-handle" class="ui-slider-handle"></div>
-                        </div>
-                        <label for="price">Цена за м2</label>
-                        <input type="number">
-                        <p class="input-description">тыс.</p>
-                        <div id="price">
-                            <div id="custom-handle" class="ui-slider-handle"></div>
-                        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="menuModal" tabindex="-1" aria-labelledby="menuModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <ul class="nav-modal">
+                            <li class="nav-modal__item"><a class="nav-modal__link" href="#">Загородные</a></li>
+                            <li class="nav-modal__item"><a class="nav-modal__link" href="#">Городские</a></li>
+                            <li class="nav-modal__item"><a class="nav-modal__link" href="#">О компании</a></li>
+                            <li class="nav-modal__item"><a class="nav-modal__link" href="#">Наши новости</a></li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <ul class="modal-footer-social">
+                            <li class="modal-footer-social__item"><a class="modal-footer-social__link modal-footer-social__vk" href="#" target="_blank"></a></li>
+                            <li class="modal-footer-social__item"><a class="modal-footer-social__link modal-footer-social__instagram" href="#" target="_blank"></a></li>
+                            <li class="modal-footer-social__item"><a class="modal-footer-social__link modal-footer-social__facebook" href="#" target="_blank"></a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <section class="section-houses">
-            <h2 class="section-title">Загородные дома</h2>
-            <p class="section-houses__text"></p>
+        <section class="section-main">
+            @@include("../blocks/modules/header/header.html")
+            <div class="main-slider">
+                <div class="slide">
+                    <h1 class="slide__title">Жилой комплекс <span>HOMEFOR</span> - это жизнь с комфортом</h1>
+                    <p class="slide__description">Мы охватываем все важные этапы проектирование и строительство дома, а&nbsp;также повседневная эксплуатация после окончания строительства.</p>
+                    <a class="slide__button btn" href="#">подробнее</a>
+                </div>
+                <div class="slide">
+                    <h1 class="slide__title">Жилой комплекс <span>HOMEFOR</span> - это жизнь с комфортом</h1>
+                    <p class="slide__description">Мы охватываем все важные этапы проектирование и строительство дома, а&nbsp;также повседневная эксплуатация после окончания строительства.</p>
+                    <a class="slide__button btn" href="#">подробнее</a>
+                </div>
+                <div class="slide">
+                    <h1 class="slide__title">Жилой комплекс <span>HOMEFOR</span> - это жизнь с комфортом</h1>
+                    <p class="slide__description">Мы охватываем все важные этапы проектирование и строительство дома, а&nbsp;также повседневная эксплуатация после окончания строительства.</p>
+                    <a class="slide__button btn" href="#">подробнее</a>
+                </div>
+            </div>
+        </section>
+        <section class="section-form">
+            <div class="wrapper">
+                <form>
+                    <div class="form-list">
+                        <div class="form-list-item">
+                            <select class="form-select" name="object" id="object">
+                                <option selected="selected" disabled>Тип объекта</option>
+                                <option>Загородные дома</option>
+                                <option>Городские квартиры</option>
+                            </select>
+                        </div>
+                        <div class="form-list-item">
+                            <select class="form-select" name="district" id="district">
+                                <option selected="selected" disabled>Район</option>
+                                <option>Верх-Исетский район</option>
+                                <option>Железнодорожный район</option>
+                                <option>Чкаловский район</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-input">
+                        <div class="form-input-item">
+                            <p>
+                                <label class="form-input__text" for="square">Площадь</label>
+                                <input class="form-input__value" type="text" id="square" readonly>
+                            </p>
+                            <div id="square-show">
+                                <div class="form-input-number">
+                                    <p>0</p>
+                                    <p>1000</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-input-item">
+                            <p>
+                                <label class="form-input__text" for="price">Цена за м2</label>
+                                <input class="form-input__value" type="text" id="price" readonly>
+                            </p>
+                            <div id="price-show">
+                                <div class="form-input-number">
+                                    <p>0</p>
+                                    <p>98000</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-button">
+                        <button class="form-button__reset" type="reset">Сбросить фильтры</button>
+                        <button class="form-button__submit">показать</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="section-house">
+            <div class="wrapper">
+                <div class="house">
+                    <h2 class="title house__title">Загородные дома</h2>
+                    <p class="description house__description">Наши дома расположились в уютных районах Екатеринбурга: Верх-Исетский район, Железнодорожный район, Чкаловский район.</p>
+                </div>
+                <div class="house-slider slider">
+                    <div class="house-slide">
+                        <div class="house-slide__border">
+                            <div class="house-top house-top-01">
+                                <h3 class="house-top__title">Дом “Брусника”</h3>
+                                <p class="house-top__adress">ул. Карла Маркса, 60, Екатеринбург</p>
+                                <div class="house-top__like"></div>
+                            </div>
+                            <div class="house-bottom">
+                                <h3 class="house-bottom__title">Дом “Брусника”</h3>
+                                <p class="house-bottom__adress">ул. Карла Маркса, 60, Екатеринбург</p>
+                                <ul class="house-about">
+                                    <li class="house-about__item house-about__home">200 м2</li>
+                                    <li class="house-about__item house-about__area">10 сот</li>
+                                    <li class="house-about__item house-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="house-bottom__price">7 005 456 500 &#8381;</p>
+                                <span class="house-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="house-slide">
+                        <div class="house-slide__border">
+                            <div class="house-top house-top-02">
+                                <h3 class="house-top__title">Дом “Трендис”</h3>
+                                <p class="house-top__adress">ул. Урицкого, 13, Екатеринбург</p>
+                                <div class="house-top__like"></div>
+                            </div>
+                            <div class="house-bottom">
+                                <h3 class="house-bottom__title">Дом “Трендис”</h3>
+                                <p class="house-bottom__adress">ул. Урицкого, 13, Екатеринбург</p>
+                                <ul class="house-about">
+                                    <li class="house-about__item house-about__home">500 м2</li>
+                                    <li class="house-about__item house-about__area">12 сот</li>
+                                    <li class="house-about__item house-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="house-bottom__price">10 000 234 500 &#8381;</p>
+                                <span class="house-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="house-slide">
+                        <div class="house-slide__border">
+                            <div class="house-top house-top-03">
+                                <h3 class="house-top__title">Дома “Панорома”</h3>
+                                <p class="house-top__adress">ул. Толстого, 340, Екатеринбург</p>
+                                <div class="house-top__like"></div>
+                            </div>
+                            <div class="house-bottom">
+                                <h3 class="house-bottom__title">Дома “Панорома”</h3>
+                                <p class="house-bottom__adress">ул. Толстого, 340, Екатеринбург</p>
+                                <ul class="house-about">
+                                    <li class="house-about__item house-about__home">150 м2</li>
+                                    <li class="house-about__item house-about__area">13 сот</li>
+                                    <li class="house-about__item house-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="house-bottom__price">5 045 000 500 &#8381;</p>
+                                <span class="house-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="house-slide">
+                        <div class="house-slide__border">
+                            <div class="house-top house-top-01">
+                                <h3 class="house-top__title">Дом “Брусника”</h3>
+                                <p class="house-top__adress">ул. Карла Маркса, 60, Екатеринбург</p>
+                                <div class="house-top__like"></div>
+                            </div>
+                            <div class="house-bottom">
+                                <h3 class="house-bottom__title">Дом “Брусника”</h3>
+                                <p class="house-bottom__adress">ул. Карла Маркса, 60, Екатеринбург</p>
+                                <ul class="house-about">
+                                    <li class="house-about__item house-about__home">200 м2</li>
+                                    <li class="house-about__item house-about__area">10 сот</li>
+                                    <li class="house-about__item house-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="house-bottom__price">7 005 456 500 &#8381;</p>
+                                <span class="house-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="house-slide">
+                        <div class="house-slide__border">
+                            <div class="house-top house-top-02">
+                                <h3 class="house-top__title">Дом “Трендис”</h3>
+                                <p class="house-top__adress">ул. Урицкого, 13, Екатеринбург</p>
+                                <div class="house-top__like"></div>
+                            </div>
+                            <div class="house-bottom">
+                                <h3 class="house-bottom__title">Дом “Трендис”</h3>
+                                <p class="house-bottom__adress">ул. Урицкого, 13, Екатеринбург</p>
+                                <ul class="house-about">
+                                    <li class="house-about__item house-about__home">500 м2</li>
+                                    <li class="house-about__item house-about__area">12 сот</li>
+                                    <li class="house-about__item house-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="house-bottom__price">10 000 234 500 &#8381;</p>
+                                <span class="house-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="house-slide">
+                        <div class="house-slide__border">
+                            <div class="house-top house-top-03">
+                                <h3 class="house-top__title">Дома “Панорома”</h3>
+                                <p class="house-top__adress">ул. Толстого, 340, Екатеринбург</p>
+                                <div class="house-top__like"></div>
+                            </div>
+                            <div class="house-bottom">
+                                <h3 class="house-bottom__title">Дома “Панорома”</h3>
+                                <p class="house-bottom__adress">ул. Толстого, 340, Екатеринбург</p>
+                                <ul class="house-about">
+                                    <li class="house-about__item house-about__home">150 м2</li>
+                                    <li class="house-about__item house-about__area">13 сот</li>
+                                    <li class="house-about__item house-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="house-bottom__price">5 045 000 500 &#8381;</p>
+                                <span class="house-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-flat">
+            <div class="wrapper">
+                <div class="flat">
+                    <h2 class="title flat__title">Городские квартиры</h2>
+                    <p class="description flat__description">В каталоге квартир вы найдете актуальные планировки и цены. Это те квартиры, которые есть в продаже сейчас.</p>
+                </div>
+                <div class="flat-cards">
+                    <div class="flat-item">
+                        <div class="flat-item__border">
+                            <div class="flat-top flat-top-01">
+                                <h3 class="flat-top__title">Дом  “Жуковка”</h3>
+                                <p class="flat-top__adress">ул. Карла Маркса, 60, Екатеринбург</p>
+                                <div class="flat-top__like"></div>
+                            </div>
+                            <div class="flat-bottom">
+                                <h3 class="flat-bottom__title">Дом  “Жуковка”</h3>
+                                <p class="flat-bottom__adress">ул. Карла Маркса, 60, Екатеринбург</p>
+                                <ul class="flat-about">
+                                    <li class="flat-about__item flat-about__home">72 м2</li>
+                                    <li class="flat-about__item flat-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="flat-bottom__price">3 006 435 500 &#8381;</p>
+                                <span class="flat-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flat-item">
+                        <div class="flat-item__border">
+                            <div class="flat-top flat-top-02">
+                                <h3 class="flat-top__title">Дом  “Парашют”</h3>
+                                <p class="flat-top__adress">ул. Зорге, 160, Екатеринбург</p>
+                                <div class="flat-top__like"></div>
+                            </div>
+                            <div class="flat-bottom">
+                                <h3 class="flat-bottom__title">Дом  “Парашют”</h3>
+                                <p class="flat-bottom__adress">ул. Зорге, 160, Екатеринбург</p>
+                                <ul class="flat-about">
+                                    <li class="flat-about__item flat-about__home">112 м2</li>
+                                    <li class="flat-about__item flat-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="flat-bottom__price">5 000 974 500 &#8381;</p>
+                                <span class="flat-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flat-item">
+                        <div class="flat-item__border">
+                            <div class="flat-top flat-top-03">
+                                <h3 class="flat-top__title">Дом  “Весна”</h3>
+                                <p class="flat-top__adress">ул. Заречная, 120, Екатеринбург</p>
+                                <div class="flat-top__like"></div>
+                            </div>
+                            <div class="flat-bottom">
+                                <h3 class="flat-bottom__title">Дом  “Весна”</h3>
+                                <p class="flat-bottom__adress">ул. Заречная, 120, Екатеринбург</p>
+                                <ul class="flat-about">
+                                    <li class="flat-about__item flat-about__home">100 м2</li>
+                                    <li class="flat-about__item flat-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="flat-bottom__price">6 120 412 500 &#8381;</p>
+                                <span class="flat-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flat-item">
+                        <div class="flat-item__border">
+                            <div class="flat-top flat-top-04">
+                                <h3 class="flat-top__title">Дом  “Пионер”</h3>
+                                <p class="flat-top__adress">ул. Карла Маркса, 120, Екатеринбург</p>
+                                <div class="flat-top__like"></div>
+                            </div>
+                            <div class="flat-bottom">
+                                <h3 class="flat-bottom__title">Дом  “Пионер”</h3>
+                                <p class="flat-bottom__adress">ул. Карла Маркса, 120, Екатеринбург</p>
+                                <ul class="flat-about">
+                                    <li class="flat-about__item flat-about__home">90 м2</li>
+                                    <li class="flat-about__item flat-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="flat-bottom__price">3 120 000 500 &#8381;</p>
+                                <span class="flat-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flat-item">
+                        <div class="flat-item__border">
+                            <div class="flat-top flat-top-05">
+                                <h3 class="flat-top__title">Дом  “Манхетен”</h3>
+                                <p class="flat-top__adress">ул. Московская, 10, Екатеринбург</p>
+                                <div class="flat-top__like"></div>
+                            </div>
+                            <div class="flat-bottom">
+                                <h3 class="flat-bottom__title">Дом  “Манхетен”</h3>
+                                <p class="flat-bottom__adress">ул. Московская, 10, Екатеринбург</p>
+                                <ul class="flat-about">
+                                    <li class="flat-about__item flat-about__home">87 м2</li>
+                                    <li class="flat-about__item flat-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="flat-bottom__price">6 000 456 000 &#8381;</p>
+                                <span class="flat-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flat-item">
+                        <div class="flat-item__border">
+                            <div class="flat-top flat-top-06">
+                                <h3 class="flat-top__title">Дом  “Дружба”</h3>
+                                <p class="flat-top__adress">ул. Прашина, 60, Екатеринбург</p>
+                                <div class="flat-top__like"></div>
+                            </div>
+                            <div class="flat-bottom">
+                                <h3 class="flat-bottom__title">Дом  “Дружба”</h3>
+                                <p class="flat-bottom__adress">ул. Прашина, 60, Екатеринбург</p>
+                                <ul class="flat-about">
+                                    <li class="flat-about__item flat-about__home">50 м2</li>
+                                    <li class="flat-about__item flat-about__visual">с отделкой</li>
+                                </ul>
+                                <p class="flat-bottom__price">4 012 400 500 &#8381;</p>
+                                <span class="flat-bottom__like"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="flat-button" href="#">Смотреть больше</a>
+            </div>
+        </section>
+        <section class="section-map">
+            <div class="wrapper">
+                <div class="map">
+                    <h2 class="title map__title">Генплан</h2>
+                    <p class="description map__description">На генплане вы можете посмотреть территорию покупки. В поселке все предусмотрено. Здесь проведены необходимые коммуникации. Это место влюбляет в себя.</p>
+                </div>
+            </div>
+            <div class="map-tabs" id="tabs">
+                <ul class="map-tabs-list">
+                  <li class="map-tabs__item"><a class="map-tabs__link" href="#tabs-1">Загородные дома</a></li>
+                  <li class="map-tabs__item"><a class="map-tabs__link map-tabs__link-before" href="#tabs-2">Городские квартиры</a></li>
+                </ul>
+                <div class="map-tabs-map" id="tabs-1">
+                    <div class="map-tabs-container">
+                        <div class="map-tabs-map__card map-tabs-map__01">
+                            <p class="map-tabs-map__text">Дом 23</p>
+                        </div>
+                        <div class="map-tabs-map__card map-tabs-map__02">
+                            <p class="map-tabs-map__text">Дом 56</p>
+                            <p class="map-tabs-map__info">Вы можете приобрести</p>
+                            <p class="map-tabs-map__price">10 567 457 руб</p>
+                        </div>
+                        <div class="map-tabs-map__card map-tabs-map__03">
+                            <p class="map-tabs-map__text">Дом 116</p>
+                        </div>
+                        <div class="map-tabs-map__card map-tabs-map__04">
+                            <p class="map-tabs-map__text">Дом 234</p>
+                        </div>
+                        <div class="map-tabs-map__card map-tabs-map__05">
+                            <p class="map-tabs-map__text">Школа №27</p>
+                        </div> 
+                    </div>
+                </div>
+                <div class="map-tabs-map" id="tabs-2">
+                    <div class="map-tabs-container"></div>
+                </div>
+            </div>
+        </section>
+        <section class="section-about">
+            <div class="wrapper">
+                <div class="about">
+                    <h2 class="title about__title">О компании</h2>
+                    <p class="description about__description">Профессиональный оператор рынка элитной недвижимости с&nbsp;2008&nbsp;года. HOMEFOR&nbsp;–&nbsp;это сочетание репутации, многолетнего опыта и&nbsp;высокого уровня сервиса. Компания заслужила доверие и&nbsp;признание профессиональных участников рынка.</p>
+                </div>
+                <div class="about-advantages">
+                    <div class="advantages-item">
+                        <div class="advantages-item__image advantages-item__01"></div>
+                        <p class="advantages-item__title">Большой опыт в&nbsp;строительстве</p>
+                    </div>
+                    <div class="advantages-item">
+                        <div class="advantages-item__image advantages-item__02"></div>
+                        <p class="advantages-item__title">Доступные цены</p>
+                    </div>
+                    <div class="advantages-item">
+                        <div class="advantages-item__image advantages-item__03"></div>
+                        <p class="advantages-item__title">Оперативные сроки работы</p>
+                    </div>
+                    <div class="advantages-item">
+                        <div class="advantages-item__image advantages-item__04"></div>
+                        <p class="advantages-item__title">Качественные материалы</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-news">
+            <div class="wrapper">
+                <div class="news">
+                    <h2 class="title news__title">Наши новости</h2>
+                    <p class="description news__description">Узнай новости компании первым. Мы всегда остаемся в&nbsp;тренде.</p>
+                </div>
+                <div class="slider news-slider">
+                    <div class="news-slide">
+                        <div class="news-slide-back">
+                            <p class="news-slide__date">02.04.2020</p>
+                            <p class="news-slide__text">В 2018 году происходили изменения в главном законе долевого строительства ФЗ-214 для решения сложной задачи – строительства 120 млн квадратных метров жилья нового качества и&nbsp;усиления контроля </p>
+                            <a class="news-slide__link" href="#">Смотреть больше</a>
+                        </div>
+                    </div>
+                    <div class="news-slide">
+                        <div class="news-slide-back">
+                            <p class="news-slide__date">02.04.2020</p>
+                            <p class="news-slide__text">В 2018 году происходили изменения в главном законе долевого строительства ФЗ-214 для решения сложной задачи – строительства 120 млн квадратных метров жилья нового качества и&nbsp;усиления контроля </p>
+                            <a class="news-slide__link" href="#">Смотреть больше</a>
+                        </div>
+                    </div>
+                    <div class="news-slide">
+                        <div class="news-slide-back">
+                            <p class="news-slide__date">02.04.2020</p>
+                            <p class="news-slide__text">В 2018 году происходили изменения в главном законе долевого строительства ФЗ-214 для решения сложной задачи – строительства 120 млн квадратных метров жилья нового качества и&nbsp;усиления контроля </p>
+                            <a class="news-slide__link" href="#">Смотреть больше</a>
+                        </div>
+                    </div>
+                    <div class="news-slide">
+                        <div class="news-slide-back">
+                            <p class="news-slide__date">02.04.2020</p>
+                            <p class="news-slide__text">В 2018 году происходили изменения в главном законе долевого строительства ФЗ-214 для решения сложной задачи – строительства 120 млн квадратных метров жилья нового качества и&nbsp;усиления контроля </p>
+                            <a class="news-slide__link" href="#">Смотреть больше</a>
+                        </div>
+                    </div>
+                    <div class="news-slide">
+                        <div class="news-slide-back">
+                            <p class="news-slide__date">02.04.2020</p>
+                            <p class="news-slide__text">В 2018 году происходили изменения в главном законе долевого строительства ФЗ-214 для решения сложной задачи – строительства 120 млн квадратных метров жилья нового качества и&nbsp;усиления контроля </p>
+                            <a class="news-slide__link" href="#">Смотреть больше</a>
+                        </div>
+                    </div>
+                    <div class="news-slide">
+                        <div class="news-slide-back">
+                            <p class="news-slide__date">02.04.2020</p>
+                            <p class="news-slide__text">В 2018 году происходили изменения в главном законе долевого строительства ФЗ-214 для решения сложной задачи – строительства 120 млн квадратных метров жилья нового качества и&nbsp;усиления контроля </p>
+                            <a class="news-slide__link" href="#">Смотреть больше</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         @@include("../blocks/modules/footer/footer.html")
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
-            $( function() {
-                $( "#objectType" ).selectmenu();
-                $( "#region" ).selectmenu();
-                $( "#area" ).slider({
-                    create: function() {
-                        handle.text( $( this ).slider( "value" ) );
-                    },
-                    slide: function( event, ui ) {
-                        handle.text( ui.value );
-                    }
-                });
-                $( "#price" ).slider({
-                    create: function() {
-                        handle.text( $( this ).slider( "value" ) );
-                    },
-                    slide: function( event, ui ) {
-                        handle.text( ui.value );
-                    }
-                });
-            } );
-        </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+        <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
         <script src="js/main.js"></script>
         <script src="js/vendor.js"></script>
+        <script>
+            $('.main-slider').slick({
+                dots: true,
+                arrows: false
+            });
+            $('.slider').slick({
+                dots: true,
+                infinite: false,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                    breakpoint: 1201,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        dots: true
+                    }
+                    },
+                    {
+                    breakpoint: 781,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false
+                    }
+                    }
+                ]
+            });
+            $( function() {
+                $( "#tabs" ).tabs();
+            } );
+            $( "#object" ).selectmenu();
+            $( "#district" ).selectmenu();
+            $( function() {
+                $( "#square-show" ).slider({
+                range: "min",
+                value: 120,
+                min: 0,
+                max: 1000,
+                slide: function( event, ui ) {
+                    $( "#square" ).val( ui.value + " " + "м2" );
+                }
+                });
+                $( "#square" ).val($( "#square-show" ).slider( "value" ) + " " + "м2");
+            } );
+            $( function() {
+                $( "#price-show" ).slider({
+                range: "min",
+                value: 10350,
+                min: 0,
+                max: 98000,
+                slide: function( event, ui ) {
+                    $( "#price" ).val( ui.value + " " + "руб." );
+                }
+                });
+                $( "#price" ).val($( "#price-show" ).slider( "value" ) + " " + "руб.");
+            } );
+        </script>
     </body>
 </html>
